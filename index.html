@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>🎓 StudentHub</h2>
+        <nav>
+            <a href="#" class="active">🏠 Dashboard</a>
+            <a href="#courses">📚 My Courses</a>
+            <a href="#attendance">📊 Attendance</a>
+            <a href="#assignments">📝 Assignments</a>
+            <a href="#results">🏆 Results</a>
+            <a href="#profile">👤 My Profile</a>
+        </nav>
+        <button class="logout" onclick="logout()">↪ Logout</button>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <div>
+                <h1>Student Dashboard</h1>
+                <p>Welcome back! Here's your academic overview.</p>
+            </div>
+            <div class="profile">
+                <div class="avatar">S</div>
+                <span>Student</span>
+            </div>
+        </header>
+
+        <section class="welcome">
+            <div>
+                <h2>Hello, Student! 👋</h2>
+                <p>Keep learning, keep growing. Your future starts today.</p>
+                <button onclick="showMessage()">Explore Dashboard</button>
+            </div>
+            <div class="welcome-icon">🎓</div>
+        </section>
+
+        <section class="stats">
+            <div class="card purple" id="courses">
+                <span>📚</span>
+                <p>Total Courses</p>
+                <h2>6</h2>
+                <small>Enrolled courses</small>
+            </div>
+
+            <div class="card blue" id="attendance">
+                <span>📊</span>
+                <p>Attendance</p>
+                <h2>92%</h2>
+                <small>Great progress!</small>
+            </div>
+
+            <div class="card orange" id="assignments">
+                <span>📝</span>
+                <p>Assignments</p>
+                <h2>4</h2>
+                <small>Pending submissions</small>
+            </div>
+
+            <div class="card green" id="results">
+                <span>🏆</span>
+                <p>Average Grade</p>
+                <h2>A</h2>
+                <small>Keep it up!</small>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <div class="panel">
+                <h2>My Courses</h2>
+
+                <div class="course">
+                    <div class="course-icon">💻</div>
+                    <div class="course-info">
+                        <h3>Web Development</h3>
+                        <p>Progress: 75%</p>
+                        <div class="progress"><div style="width:75%"></div></div>
+                    </div>
+                </div>
+
+                <div class="course">
+                    <div class="course-icon">🤖</div>
+                    <div class="course-info">
+                        <h3>Artificial Intelligence</h3>
+                        <p>Progress: 60%</p>
+                        <div class="progress"><div style="width:60%"></div></div>
+                    </div>
+                </div>
+
+                <div class="course">
+                    <div class="course-icon">🐍</div>
+                    <div class="course-info">
+                        <h3>Python Programming</h3>
+                        <p>Progress: 85%</p>
+                        <div class="progress"><div style="width:85%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel" id="profile">
+                <h2>Upcoming Tasks</h2>
+
+                <div class="task">
+                    <div>
+                        <h3>Python Assignment</h3>
+                        <p>Programming</p>
+                    </div>
+                    <span class="deadline">Today</span>
+                </div>
+
+                <div class="task">
+                    <div>
+                        <h3>AI Project Report</h3>
+                        <p>Artificial Intelligence</p>
+                    </div>
+                    <span class="deadline">Tomorrow</span>
+                </div>
+
+                <div class="task">
+                    <div>
+                        <h3>Web Design</h3>
+                        <p>Web Development</p>
+                    </div>
+                    <span class="deadline">Oct 20</span>
+                </div>
+
+                <button class="view-btn" onclick="viewTasks()">View All Tasks</button>
+            </div>
+        </section>
+
+        <footer>© 2026 StudentHub | Student Dashboard</footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
