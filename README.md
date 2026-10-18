@@ -1,2 +1,0 @@
-# deanu
-student dashboard
