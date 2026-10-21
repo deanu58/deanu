@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>StudentHub: Deanisha’s dashboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F3F5FA;--card:#fff;--ink:#1B2340;--mut:#5B6482;--line:#DDE2EF;--acc:#3B4BDB;--acc-t:#E8EBFD;--ok:#12805C;--warn:#B45309;--bad:#C2272D;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12162A;--card:#1B2140;--ink:#E8EBF7;--mut:#98A1C4;--line:#2C3358;--acc:#8E9BFF;--acc-t:#262D57;--ok:#4CC38A;--warn:#F0A94B;--bad:#FF7A80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12162A;--card:#1B2140;--ink:#E8EBF7;--mut:#98A1C4;--line:#2C3358;--acc:#8E9BFF;--acc-t:#262D57;--ok:#4CC38A;--warn:#F0A94B;--bad:#FF7A80;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif;margin:0;line-height:1.15}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+aside{background:var(--card);border-right:1px solid var(--line);padding:24px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:6px}
+.brand{font:700 22px "Bricolage Grotesque",sans-serif;padding:0 10px 18px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav button{background:none;border:0;text-align:left;padding:10px 12px;border-radius:10px;color:var(--mut);font-weight:500}
+.nav button:hover{background:var(--acc-t)}
+.nav button[aria-current="page"]{background:var(--acc);color:#fff}
+:root[data-theme="dark"] .nav button[aria-current="page"]{color:#12162A}
+.theme{margin-top:auto;background:none;border:1px solid var(--line);border-radius:10px;padding:8px 12px;color:var(--mut)}
+main{padding:32px clamp(16px,4vw,48px);max-width:1040px;width:100%}
+.head{margin-bottom:24px}
+.head h1{font-size:clamp(28px,4vw,38px)}
+.head p{margin:6px 0 0;color:var(--mut)}
+.grid{display:grid;gap:16px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:24px}
+.two{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.stat b{display:block;font:700 34px "Bricolage Grotesque",sans-serif}
+.stat span{color:var(--mut);font-size:14px}
+h2{font-size:20px;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.grow{flex:1;min-width:0}
+.sub{color:var(--mut);font-size:14px}
+.bar{height:10px;background:var(--acc-t);border-radius:6px;position:relative;margin:8px 0 4px}
+.bar i{display:block;height:100%;border-radius:6px;background:var(--acc)}
+.bar.att i.ok{background:var(--ok)}.bar.att i.warn{background:var(--warn)}.bar.att i.bad{background:var(--bad)}
+.bar .min{position:absolute;top:-4px;bottom:-4px;left:75%;width:2px;background:var(--ink);opacity:.55}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:10px;padding:9px 16px;font-weight:600}
+:root[data-theme="dark"] .btn{color:#12162A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn,:root:not([data-theme="light"]) .nav button[aria-current="page"]{color:#12162A}}
+.ghost{background:none;border:1px solid var(--line);border-radius:8px;padding:5px 10px;color:var(--ink);font-size:14px}
+.ghost:hover{background:var(--acc-t)}
+input[type=text],input[type=number],input[type=date],select{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+input[type=range]{width:100%;accent-color:var(--acc)}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--acc)}
+.form{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.form input[type=text]{flex:1 1 200px}
+.done .t{text-decoration:line-through;color:var(--mut)}
+.empty{color:var(--mut);padding:8px 0}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:8px 12px;margin:0}
+.kv dt{color:var(--mut)}.kv dd{margin:0}
+.sg{font:700 44px "Bricolage Grotesque",sans-serif}
+.scroll{overflow-x:auto}
+@media (max-width:760px){
+.app{grid-template-columns:1fr}
+aside{position:sticky;top:0;height:auto;flex-direction:row;align-items:center;padding:10px 12px;z-index:5;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+.brand{display:none}.theme{margin:0;flex:none}
+.nav{flex-direction:row;overflow-x:auto;flex:1}
+.nav button{white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+<div class="brand">StudentHub</div>
+<nav class="nav" id="nav" aria-label="Sections"></nav>
+<button class="theme" id="theme" type="button">Switch theme</button>
+</aside>
+<main id="view"></main>
+</div>
+<script>
+(function(){
+var KEY="studenthub-deanisha-v1";
+var TABS=[["overview","Overview"],["courses","Courses"],["attendance","Attendance"],["tasks","Assignments"],["results","Results"],["profile","Profile"]];
+var GP={"O":10,"A+":9,"A":8,"B+":7,"B":6,"C":5,"F":0};
+function iso(n){var d=new Date();d.setDate(d.getDate()+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function def(){return{
+courses:[["Web Development","💻",75,38,40],["Artificial Intelligence","🤖",60,36,40],["Python Programming","🐍",85,47,50],["Database Management","🗄️",70,44,50],["Data Science","📈",55,46,50],["Machine Learning","🧠",65,40,43]].map(function(c,i){return{id:i,name:c[0],icon:c[1],progress:c[2],att:c[3],tot:c[4]}}),
+tasks:[{id:1,title:"Python assignment",course:"Python Programming",due:iso(0),done:false},{id:2,title:"AI project report",course:"Artificial Intelligence",due:iso(1),done:false},{id:3,title:"Web design layout",course:"Web Development",due:iso(3),done:false},{id:4,title:"DBMS record",course:"Database Management",due:iso(6),done:false}],
+calc:[{n:"Web Development",c:3,g:"A"},{n:"Machine Learning",c:4,g:"A+"},{n:"Python Programming",c:3,g:"A"}],
+next:10};}
+var S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}
+if(!S||!S.courses)S=def();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function pct(c){return c.tot?Math.round(c.att/c.tot*100):0}
+function overall(){var a=0,t=0;S.courses.forEach(function(c){a+=c.att;t+=c.tot});return t?Math.round(a/t*100):0}
+function cls(p){return p>=80?"ok":p>=75?"warn":"bad"}
+function days(d){var a=new Date(d+"T00:00:00"),b=new Date();b.setHours(0,0,0,0);return Math.round((a-b)/864e5)}
+function due(d){var n=days(d);return n<0?"Overdue by "+(-n)+(n===-1?" day":" days"):n===0?"Due today":n===1?"Due tomorrow":"Due in "+n+" days"}
+function dcls(d){var n=days(d);return n<0?"bad":n<=1?"warn":""}
+function pending(){return S.tasks.filter(function(t){return!t.done}).sort(function(a,b){return a.due<b.due?-1:1})}
+function advice(c){var p=pct(c);if(p>=75){var m=Math.floor(c.att/.75-c.tot);return m>0?"You can miss "+m+(m===1?" class":" classes")+" and stay at 75%.":"At the limit. Attend every class."}
+return"Attend the next "+Math.ceil((.75*c.tot-c.att)/.25)+" classes in a row to reach 75%."}
+function sgpa(){var cr=0,pts=0;S.calc.forEach(function(r){cr+=+r.c||0;pts+=(+r.c||0)*GP[r.g]});return cr?(pts/cr).toFixed(2):"0.00"}
+var tab=(location.hash||"#overview").slice(1);if(!TABS.some(function(t){return t[0]===tab}))tab="overview";
+function greet(){var h=new Date().getHours();return h<12?"Good morning":h<17?"Good afternoon":"Good evening"}
+function head(t,p){return'<div class="head"><h1>'+t+'</h1><p>'+p+'</p></div>'}
+function taskRow(t){return'<div class="row'+(t.done?" done":"")+'"><input type="checkbox" data-act="tick" data-id="'+t.id+'" aria-label="Mark done"'+(t.done?" checked":"")+'><div class="grow"><div class="t">'+esc(t.title)+'</div><div class="sub">'+esc(t.course)+'</div></div>'+(t.done?"":'<span class="sub '+dcls(t.due)+'">'+due(t.due)+'</span>')+'<button class="ghost" data-act="del" data-id="'+t.id+'" aria-label="Delete task">Delete</button></div>'}
+var V={
+overview:function(){var p=pending(),a=overall();
+var low=S.courses.slice().sort(function(x,y){return pct(x)-pct(y)}).slice(0,3);
+return head(greet()+", Deanisha","Here is where you stand today.")+
+'<div class="grid stats"><div class="card stat"><b>'+S.courses.length+'</b><span>Courses this semester</span></div><div class="card stat"><b class="'+cls(a)+'">'+a+'%</b><span>Overall attendance</span></div><div class="card stat"><b>'+p.length+'</b><span>Assignments pending</span></div><div class="card stat"><b>8.2</b><span>Current CGPA</span></div></div>'+
+'<div class="grid two"><div class="card"><h2>Next deadlines</h2>'+(p.length?p.slice(0,4).map(function(t){return'<div class="row"><div class="grow"><div>'+esc(t.title)+'</div><div class="sub">'+esc(t.course)+'</div></div><span class="sub '+dcls(t.due)+'">'+due(t.due)+'</span></div>'}).join(""):'<div class="empty">Nothing pending. Add an assignment in the Assignments tab.</div>')+'</div>'+
+'<div class="card"><h2>Attendance to watch</h2>'+low.map(function(c){var q=pct(c);return'<div class="row"><div class="grow"><div>'+c.icon+" "+esc(c.name)+'</div><div class="sub">'+advice(c)+'</div></div><b class="'+cls(q)+'">'+q+'%</b></div>'}).join("")+'</div></div>'},
+courses:function(){return head("Courses","Drag a slider to update how far you are in each course.")+'<div class="grid two">'+S.courses.map(function(c){return'<div class="card"><h3>'+c.icon+" "+esc(c.name)+'</h3><div class="bar"><i style="width:'+c.progress+'%"></i></div><div class="sub" id="pl'+c.id+'">'+c.progress+'% complete</div><input type="range" min="0" max="100" step="5" value="'+c.progress+'" data-act="prog" data-id="'+c.id+'" aria-label="Progress for '+esc(c.name)+'"></div>'}).join("")+'</div>'},
+attendance:function(){return head("Attendance","Overall "+overall()+"%. The line on each bar marks the 75% minimum.")+'<div class="grid">'+S.courses.map(function(c){var p=pct(c);return'<div class="card"><div class="row" style="border:0;padding:0"><div class="grow"><h3>'+c.icon+" "+esc(c.name)+'</h3><div class="sub">'+c.att+" of "+c.tot+' classes attended</div></div><b class="'+cls(p)+'" style="font-size:24px">'+p+'%</b></div><div class="bar att"><i class="'+cls(p)+'" style="width:'+p+'%"></i><span class="min"></span></div><div class="row" style="border:0;padding:6px 0 0"><div class="grow sub">'+advice(c)+'</div><button class="ghost" data-act="pres" data-id="'+c.id+'">Present</button><button class="ghost" data-act="abs" data-id="'+c.id+'">Absent</button></div></div>'}).join("")+'</div>'},
+tasks:function(){var p=pending(),d=S.tasks.filter(function(t){return t.done});
+return head("Assignments","Tick a task to mark it done. "+p.length+" pending, "+d.length+" completed.")+
+'<div class="card"><div class="form"><input type="text" id="nt" placeholder="New assignment title" aria-label="Title"><select id="nc" aria-label="Course">'+S.courses.map(function(c){return"<option>"+esc(c.name)+"</option>"}).join("")+'</select><input type="date" id="nd" value="'+iso(2)+'" aria-label="Due date"><button class="btn" data-act="add">Add assignment</button></div>'+
+'<h2>Pending</h2>'+(p.length?p.map(taskRow).join(""):'<div class="empty">All caught up.</div>')+'<h2 style="margin-top:20px">Completed</h2>'+(d.length?d.map(taskRow).join(""):'<div class="empty">Finished assignments will appear here.</div>')+'</div>'},
+results:function(){return head("Results","Estimate a semester’s SGPA. Change credits and grades to see it update.")+
+'<div class="grid two"><div class="card"><div class="sub">Current CGPA</div><div class="sg">8.2</div><div class="sub">Mohan Babu University, B.Tech CSE (AI &amp; ML)</div></div><div class="card"><div class="sub">Estimated SGPA</div><div class="sg" id="sg">'+sgpa()+'</div><div class="sub">Based on the subjects below</div></div></div>'+
+'<div class="card scroll" style="margin-top:16px"><div class="form" style="margin:0 0 8px">'+'<span class="sub" style="flex:1 1 200px">Subject</span><span class="sub" style="width:80px">Credits</span><span class="sub" style="width:80px">Grade</span><span style="width:70px"></span></div>'+
+S.calc.map(function(r,i){return'<div class="form" style="margin:0 0 8px"><input type="text" value="'+esc(r.n)+'" data-act="cn" data-i="'+i+'" aria-label="Subject"><input type="number" min="1" max="6" value="'+r.c+'" style="width:80px" data-act="cc" data-i="'+i+'" aria-label="Credits"><select style="width:80px" data-act="cg" data-i="'+i+'" aria-label="Grade">'+Object.keys(GP).map(function(g){return"<option"+(g===r.g?" selected":"")+">"+g+"</option>"}).join("")+'</select><button class="ghost" style="width:70px" data-act="rm" data-i="'+i+'">Remove</button></div>'}).join("")+
+'<button class="btn" data-act="addr" style="margin-top:8px">Add subject</button></div>'},
+profile:function(){return head("Profile","Your details and goals.")+
+'<div class="grid two"><div class="card"><h2>L. Deanisha</h2><dl class="kv"><dt>Program</dt><dd>B.Tech, Computer Science &amp; Engineering (AI &amp; ML)</dd><dt>University</dt><dd>Mohan Babu University</dd><dt>Year</dt><dd>Fourth year (2023 to 2027)</dd><dt>CGPA</dt><dd>8.2</dd><dt>Location</dt><dd>Andhra Pradesh, India</dd><dt>Goal</dt><dd>Entry-level software engineer</dd></dl></div>'+
+'<div class="card"><h2>Education</h2><div class="row"><div class="grow"><div>B.Tech, CSE (AI &amp; ML)</div><div class="sub">Mohan Babu University, 2023 to 2027</div></div><b>8.2 CGPA</b></div><div class="row"><div class="grow"><div>Intermediate (10+2)</div><div class="sub">Sri Sai Vivekananda Junior College, 2023</div></div><b>66%</b></div><div class="row"><div class="grow"><div>10th</div><div class="sub">Sri Saraswathi Vignana Mandir, 2021</div></div><b>98%</b></div></div>'+
+'<div class="card"><h2>Contact</h2><div class="row"><a href="mailto:deanulll26@gmail.com">deanulll26@gmail.com</a></div><div class="row"><a href="https://github.com/deanu58" target="_blank" rel="noopener">GitHub</a></div><div class="row"><a href="https://linkedin.com/in/deanisha-leelaram-3a19a434a/" target="_blank" rel="noopener">LinkedIn</a></div></div></div>'}
+};
+var nav=document.getElementById("nav"),view=document.getElementById("view");
+nav.innerHTML=TABS.map(function(t){return'<button type="button" data-tab="'+t[0]+'">'+t[1]+'</button>'}).join("");
+function render(){view.innerHTML=V[tab]();[].forEach.call(nav.children,function(b){if(b.dataset.tab===tab)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")})}
+function go(t){tab=t;try{location.hash=t}catch(e){}render();window.scrollTo(0,0)}
+function find(a,id){return a.filter(function(x){return x.id==id})[0]}
+document.addEventListener("click",function(e){
+var b=e.target.closest("button");if(!b)return;
+if(b.dataset.tab)return go(b.dataset.tab);
+var a=b.dataset.act,id=b.dataset.id;
+if(a==="pres"){var c=find(S.courses,id);c.att++;c.tot++}
+else if(a==="abs"){find(S.courses,id).tot++}
+else if(a==="del"){S.tasks=S.tasks.filter(function(t){return t.id!=id})}
+else if(a==="add"){var t=document.getElementById("nt").value.trim();if(!t){document.getElementById("nt").focus();return}
+S.tasks.push({id:S.next++,title:t,course:document.getElementById("nc").value,due:document.getElementById("nd").value||iso(2),done:false})}
+else if(a==="addr"){S.calc.push({n:"New subject",c:3,g:"A"})}
+else if(a==="rm"){S.calc.splice(+b.dataset.i,1)}
+else return;
+save();render()});
+document.addEventListener("change",function(e){var el=e.target,a=el.dataset.act;
+if(a==="tick"){find(S.tasks,el.dataset.id).done=el.checked;save();render()}
+else if(a==="cg"){S.calc[+el.dataset.i].g=el.value;save();document.getElementById("sg").textContent=sgpa()}});
+document.addEventListener("input",function(e){var el=e.target,a=el.dataset.act;
+if(a==="prog"){var c=find(S.courses,el.dataset.id);c.progress=+el.value;el.parentNode.querySelector(".bar i").style.width=c.progress+"%";document.getElementById("pl"+c.id).textContent=c.progress+"% complete";save()}
+else if(a==="cn"){S.calc[+el.dataset.i].n=el.value;save()}
+else if(a==="cc"){S.calc[+el.dataset.i].c=Math.max(0,+el.value||0);save();document.getElementById("sg").textContent=sgpa()}});
+document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.id==="nt")document.querySelector('[data-act="add"]').click()});
+document.getElementById("theme").addEventListener("click",function(){var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=dark?"light":"dark"});
+window.addEventListener("hashchange",function(){var t=location.hash.slice(1);if(V[t]&&t!==tab){tab=t;render()}});
+render();
+})();
+</script>
+</body>
+</html>
